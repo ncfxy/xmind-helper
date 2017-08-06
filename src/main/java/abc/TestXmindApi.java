@@ -9,25 +9,25 @@ import org.xmind.core.ITopic;
 import org.xmind.core.IWorkbook;
 import org.xmind.core.IWorkbookBuilder;
 
-public class Main {
+public class TestXmindApi {
 
     public static void main(String[] args) {
-        String newWorkbookPath = "C:/Users/fan_x/Desktop/new_office.xmind";
-        String oldWorkbookPath = "C:/Users/fan_x/Desktop/office.xmind";
+        String newWorkbookPath = "C:/new_office.xmind";
+//        String oldWorkbookPath = "C:/office.xmind";
 
         IWorkbookBuilder builder = Core.getWorkbookBuilder();
-        IWorkbook workbook = builder.createWorkbook(newWorkbookPath);
+        IWorkbook workbook = builder.createWorkbook();
         IWorkbook oldWorkbook = null;
-        try {
-            oldWorkbook = builder.loadFromPath(oldWorkbookPath);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (CoreException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        workbook.createTopic();
+//        try {
+//            oldWorkbook = builder.loadFromPath(oldWorkbookPath);
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        } catch (CoreException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//        workbook.createTopic();
 
         ISheet defSheet = workbook.getPrimarySheet();
         ITopic rootTopic = defSheet.getRootTopic();
@@ -53,7 +53,7 @@ public class Main {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        System.out.println(oldWorkbook.toString());
+//        System.out.println(oldWorkbook.toString());
     }
 
 }
