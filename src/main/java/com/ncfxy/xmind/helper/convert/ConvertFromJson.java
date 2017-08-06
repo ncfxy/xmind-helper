@@ -25,34 +25,14 @@ import com.google.gson.JsonParser;
 import net.sf.json.JSONFunction;
 import net.sf.json.JSONObject;
 
-public class ConvertFromJson {
-	
-	private String filePath = null;
-	
-	private String desPath = null;
-	
+public class ConvertFromJson extends AbstractConvert{
 	
 	/**
 	 * 要分析的文件的path
 	 * @param filePath
 	 */
 	public ConvertFromJson(String filePath) {
-		super();
-		this.filePath = filePath;
-		File file = new File(this.filePath);
-		File directory = file.getParentFile();
-		File desFile = new File(directory.getAbsolutePath()+"/"+file.getName()+".xmind");
-		if(!desFile.exists()){
-			try {
-				desFile.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		if(desFile.exists()){
-			desPath = desFile.getAbsolutePath();
-		}
+		super(filePath);
 	}
 
 
@@ -148,7 +128,7 @@ public class ConvertFromJson {
         return workbook;
 	}
 	
-	public int covert(){
+	public int convert(){
 		String jsonStr = readFromFile();
 		JsonElement jsonEle = getFromJsonFile(jsonStr);
 		IWorkbook workbook = generateXindWorkBook(jsonEle);
@@ -165,27 +145,6 @@ public class ConvertFromJson {
 		return 1;
 	}
 	
-	
-	public String getFilePath() {
-		return filePath;
-	}
-
-
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
-
-
-	public String getDesPath() {
-		return desPath;
-	}
-
-
-	public void setDesPath(String desPath) {
-		this.desPath = desPath;
-	}
-
-
 	public static void main(String[] args) {
 		ConvertFromJson m = new ConvertFromJson("src/main/resources/sample.json");
 		String jsonStr = m.readFromFile();
