@@ -24,8 +24,8 @@ public class ConvertFromXml extends AbstractConvert {
 		super(filePath);
 	}
 
-	public Document parserXml() {
-		File inputXml = new File(this.filePath);
+	public Document parserXml(String path) {
+		File inputXml = new File(path);
 		SAXReader saxReader = new SAXReader();
 
 		Document document = null;
@@ -71,7 +71,7 @@ public class ConvertFromXml extends AbstractConvert {
 	}
 
 	public int convert() {
-		Document document = parserXml();
+		Document document = parserXml(this.getFilePath());
 		IWorkbook workbook = generateXindWorkBook(document);
 
 		try {

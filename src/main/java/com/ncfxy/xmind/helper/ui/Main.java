@@ -16,12 +16,14 @@ import com.ncfxy.xmind.helper.convert.ConvertFromHtml;
 import com.ncfxy.xmind.helper.convert.ConvertFromHtmlSupportForneus;
 import com.ncfxy.xmind.helper.convert.ConvertFromJson;
 import com.ncfxy.xmind.helper.convert.ConvertFromXml;
+import com.ncfxy.xmind.helper.convert.ConvertFromXmlMavenPom;
 
 public class Main {
 	
 	
 	public static void main(String[] args) {
 		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")+"/Desktop"));
         fileChooser.setDialogTitle("Please select your JSON or XML file.");
         int result = fileChooser.showOpenDialog(fileChooser);  // 打开"打开文件"对话框
         // int result = dlg.showSaveDialog(this);  // 打"开保存文件"对话框
@@ -30,6 +32,9 @@ public class Main {
         	Convert convert = null;
         	if(file.getAbsolutePath().endsWith(".json")){
         		convert = new ConvertFromJson(file.getAbsolutePath());
+        	}else if(file.getAbsolutePath().endsWith("pom.xml")
+        			|| file.getAbsolutePath().endsWith(".pom")){
+        		convert = new ConvertFromXmlMavenPom(file.getAbsolutePath());
         	}else if(file.getAbsolutePath().endsWith(".xml")){
         		convert = new ConvertFromXml(file.getAbsolutePath());
         	}else if(file.getAbsolutePath().endsWith(".forneus.html") ){
