@@ -55,16 +55,25 @@ public class ConvertFromHtml extends AbstractConvert {
 			}
 		}
 	}
-
+	
 	public IWorkbook generateXindWorkBook(Document document) {
 		IWorkbookBuilder builder = Core.getWorkbookBuilder();
 		IWorkbook workbook = builder.createWorkbook();
 		ISheet defSheet = workbook.getPrimarySheet();
 		ITopic rootTopic = defSheet.getRootTopic();
 		
-		rootTopic.setTitleText(document.nodeName());
+		
+		
+		// 去掉DocTypeNode， 找到html根标签
+		Node htmlNode = null;
+		for(Node node: document.childNodes()){
+			if(node instanceof Element){
+				htmlNode = node;
+			}
+		}
+		rootTopic.setTitleText(htmlNode.nodeName());
 
-		dfs(workbook, rootTopic, document);
+		dfs(workbook, rootTopic, htmlNode);
 		return workbook;
 	}
 

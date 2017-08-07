@@ -13,6 +13,7 @@ import javax.swing.JTextArea;
 
 import com.ncfxy.xmind.helper.convert.Convert;
 import com.ncfxy.xmind.helper.convert.ConvertFromHtml;
+import com.ncfxy.xmind.helper.convert.ConvertFromHtmlSupportForneus;
 import com.ncfxy.xmind.helper.convert.ConvertFromJson;
 import com.ncfxy.xmind.helper.convert.ConvertFromXml;
 
@@ -31,6 +32,8 @@ public class Main {
         		convert = new ConvertFromJson(file.getAbsolutePath());
         	}else if(file.getAbsolutePath().endsWith(".xml")){
         		convert = new ConvertFromXml(file.getAbsolutePath());
+        	}else if(file.getAbsolutePath().endsWith(".forneus.html") ){
+        		convert = new ConvertFromHtmlSupportForneus(file.getAbsolutePath());
         	}else if(file.getAbsolutePath().endsWith(".html") ){
         		convert = new ConvertFromHtml(file.getAbsolutePath());
         	}else{
