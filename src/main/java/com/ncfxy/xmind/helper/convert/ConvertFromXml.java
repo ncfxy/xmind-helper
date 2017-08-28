@@ -24,17 +24,12 @@ public class ConvertFromXml extends AbstractConvert {
 		super(filePath);
 	}
 
-	public Document parserXml(String path) {
+	public Document parserXml(String path) throws DocumentException {
 		File inputXml = new File(path);
 		SAXReader saxReader = new SAXReader();
 
 		Document document = null;
-		try {
-			document = saxReader.read(inputXml);
-		} catch (DocumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		document = saxReader.read(inputXml);
 		return document;
 
 	}
@@ -71,7 +66,13 @@ public class ConvertFromXml extends AbstractConvert {
 	}
 
 	public int convert() {
-		Document document = parserXml(this.getFilePath());
+		Document document = null;
+		try {
+			document = parserXml(this.getFilePath());
+		} catch (DocumentException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		IWorkbook workbook = generateXindWorkBook(document);
 
 		try {
